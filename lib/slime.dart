@@ -14,31 +14,32 @@ class Slime extends PositionComponent{
    Timer timer;
 
   Rect slimeRect;
-  Paint slimePaint;
+  //Paint slimePaint;
   bool toggle = false,isDead=false;
   int i=0;
-
+  static final slimePaint = new Paint();
+  
   Slime(this.game, double x, double y) {
     
   
-  //Timer(Duration(seconds: 5),(){
+  Timer(Duration(seconds: 5),(){
      //game.sList.removeAt(i++);
-  //});
+  });
     
     slimeRect = Rect.fromLTWH(x, y, game.tileSizex, game.tileSizey); 
-    slimePaint = new Paint();
+    //slimePaint = new Paint();
     slimePaint.color = Color(0xff535c68);
-    
-
+    setByRect(slimeRect);
   }
   @override
   void render(Canvas c) {
-    c.drawRect(slimeRect, slimePaint);
+    c.drawRect(toRect(), slimePaint);
+    
   }
 
   @override
   void update(double t) {
-   
+    
     if(!toggle){
       slimeRect = slimeRect.translate(game.tileSizex*t, 0);
       
@@ -58,7 +59,7 @@ class Slime extends PositionComponent{
           
       }
 
-    //game.camera.y +=10;
+      game.camera.y +=10;
       
      
   }
